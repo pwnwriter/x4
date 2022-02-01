@@ -1,0 +1,39 @@
+{
+  "servers": [
+    {
+      "name": "server1",
+      "host": "192.168.1.1",
+      "port": 22,
+      "user": "username",
+      "private_key": "/path/to/private/key",
+      "commands": [
+        {
+          "description": "List directory contents",
+          "command": "ls -l"
+        },
+        {
+          "description": "Show hostname",
+          "command": "cat /etc/hostname"
+        }
+      ]
+    },
+    {
+      "name": "server2",
+      "host": "192.168.1.2",
+      "port": 22,
+      "user": "anotheruser",
+      "private_key": "/path/to/another/private/key",
+      "commands": [
+        {
+          "description": "Display disk usage",
+          "command": "df -h"
+        },
+        {
+          "description": "Show system uptime",
+          "command": "uptime"
+        }
+      ]
+    }
+  ]
+}
+
