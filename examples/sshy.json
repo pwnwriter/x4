@@ -6,14 +6,52 @@
       "port": 22,
       "user": "username",
       "private_key": "/path/to/private/key",
+      "timeout": 30,
+      "useSSHAgent": false,
       "commands": [
         {
           "description": "List directory contents",
-          "command": "ls -l"
+          "command": "ls -l",
+          "env": {
+            "VAR1": "value1"
+          },
+          "workingDirectory": "/home/username",
+          "outputHandling": {
+            "saveToFile": "/path/to/output1.txt",
+            "returnOutput": true
+          },
+          "errorHandling": {
+            "retries": 3,
+            "logErrors": true
+          },
+          "sshOptions": [
+            "-o StrictHostKeyChecking=no",
+            "-v"
+          ],
+          "sudo": {
+            "enabled": false
+          }
         },
         {
           "description": "Show hostname",
-          "command": "cat /etc/hostname"
+          "command": "cat /etc/hostname",
+          "env": {},
+          "workingDirectory": "/home/username",
+          "outputHandling": {
+            "saveToFile": "/path/to/output2.txt",
+            "returnOutput": true
+          },
+          "errorHandling": {
+            "retries": 3,
+            "logErrors": true
+          },
+          "sshOptions": [
+            "-o StrictHostKeyChecking=no",
+            "-v"
+          ],
+          "sudo": {
+            "enabled": false
+          }
         }
       ]
     },
@@ -23,17 +61,54 @@
       "port": 22,
       "user": "anotheruser",
       "private_key": "/path/to/another/private/key",
+      "timeout": 30,
+      "useSSHAgent": false,
       "commands": [
         {
           "description": "Display disk usage",
-          "command": "df -h"
+          "command": "df -h",
+          "env": {
+            "VAR1": "value1"
+          },
+          "workingDirectory": "/home/anotheruser",
+          "outputHandling": {
+            "saveToFile": "/path/to/output3.txt",
+            "returnOutput": true
+          },
+          "errorHandling": {
+            "retries": 3,
+            "logErrors": true
+          },
+          "sshOptions": [
+            "-o StrictHostKeyChecking=no",
+            "-v"
+          ],
+          "sudo": {
+            "enabled": false
+          }
         },
         {
           "description": "Show system uptime",
-          "command": "uptime"
+          "command": "uptime",
+          "env": {},
+          "workingDirectory": "/home/anotheruser",
+          "outputHandling": {
+            "saveToFile": "/path/to/output4.txt",
+            "returnOutput": true
+          },
+          "errorHandling": {
+            "retries": 3,
+            "logErrors": true
+          },
+          "sshOptions": [
+            "-o StrictHostKeyChecking=no",
+            "-v"
+          ],
+          "sudo": {
+            "enabled": false
+          }
         }
       ]
     }
   ]
 }
-
