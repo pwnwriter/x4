@@ -1,16 +1,20 @@
+mod args;
 mod parser;
+use clap::Parser;
+use miette::{Context, Result};
+use parser::parse_pipeline;
 use std::path::Path;
 
-use parser::parse_pipeline;
+fn main() -> Result<()> {
+    let cli = args::Cli::parse();
+    let pipeline_file_path = cli.pipeline_file;
+    let path = Path::new(&pipeline_file_path);
+    let pipeline =
+        parse_pipeline(path).context("Failed to parse the pipeline from the given JSON file")?;
 
-fn main() {
-    let path = Path::new("examples/sshy.json");
-    match parse_pipeline(path) {
-        Ok(pipeline) => {
-            for server in pipeline.servers {
-                println!("{:?}", server.name);
-            }
-        }
-        Err(e) => eprintln!("Error parsing pipeline: {}", e),
+    for server in pipeline.servers {
+        println!("{:?}", server.name);
     }
+
+    Ok(())
 }
