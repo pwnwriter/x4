@@ -1,9 +1,7 @@
 {
   description = "Run commands to a server via ssh";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  };
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
   outputs =
     { self, nixpkgs, ... }:
@@ -25,6 +23,8 @@
           Cocoa
           libiconv
         ];
+
+      cargoToml = with builtins; (fromTOML (readFile ./Cargo.toml));
     in
     {
       devShells = forAllSystems (pkgs: {
@@ -33,12 +33,11 @@
           packages =
             (with pkgs; [
               cmake
-              # rustc
-              # cargo
             ])
             ++ (pkgs.lib.optional pkgs.stdenvNoCC.isDarwin (darwinDeps pkgs));
         };
       });
+
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
       packages = forAllSystems (pkgs: {
         sshy =
@@ -51,7 +50,6 @@
               ./src
             ];
 
-            cargoToml = with builtins; (fromTOML (readFile ./Cargo.toml));
             pname = cargoToml.package.name;
             version = cargoToml.package.version;
             cargoLock.lockFile = ./Cargo.lock;
