@@ -1,3 +1,4 @@
+use colored::Colorize;
 use miette::{Context, IntoDiagnostic, Result};
 use serde::{Deserialize, Serialize};
 use std::{fs, path::Path};
@@ -66,14 +67,16 @@ pub struct Sudo {
 pub fn parse_pipeline(pipeline_file: &Path) -> Result<Pipeline> {
     let contents = fs::read_to_string(pipeline_file)
         .into_diagnostic()
-        .context(format!(
-            "Failed to read the pipeline JSON file at: {:?}",
-            pipeline_file
-        ))?;
+        .wrap_err_with(|| {
+            format!(
+                "Failed to read pipeline file: {}",
+                pipeline_file.display().to_string().bold()
+            )
+        })?;
 
     let pipeline: Pipeline = serde_json::from_str(&contents)
         .into_diagnostic()
-        .context("Failed to parse the JSON content into a Pipeline struct")?;
+        .wrap_err("Failed to parse the JSON content into a Pipeline struct")?;
 
     Ok(pipeline)
 }
