@@ -48,6 +48,7 @@
               ./Cargo.lock
               ./Cargo.toml
               ./src
+              ./examples
             ];
 
             pname = cargoToml.package.name;
@@ -67,7 +68,7 @@
               openssl
               pkg-config
               cmake
-              git
+              perl
             ];
             buildInputs = lib.optionals stdenv.isDarwin darwinBuildInputs;
             preBuildPhases = [ "cargoFmt" ];
