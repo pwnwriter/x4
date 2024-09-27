@@ -15,13 +15,14 @@ pub struct Cli {
     #[arg(long, default_value = "sxm.json")]
     pub pipeline: PathBuf,
 
-    /// Check pipeline
-    #[arg(long)]
-    pub check_pipeline: bool,
-
     /// Connect and request a list of identities
     #[arg(long)]
     pub inspect: bool,
+
+    /// Check pipeline configuration
+    #[arg(long)]
+    pub check_pipeline: bool,
+
 }
 
 pub fn splash() -> String {

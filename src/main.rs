@@ -3,7 +3,7 @@ mod corex;
 mod parser;
 
 use clap::Parser;
-use corex::{inspect, ssh};
+use corex::inspect;
 use miette::{Context, Result};
 use parser::parse_pipeline;
 use std::path::Path;
@@ -16,13 +16,19 @@ fn main() -> Result<()> {
 
     for server in pipeline.servers {
         println!("{:?}", server.name);
+        println!("{:?}", server.commands[1]);
+
+        let private_key_path = server
+            .resolve_private_key()
+            .context("Failed to resolve private key")?;
+        println!("{:?}", private_key_path);
+
+        let password = server.resolve_password();
+
+        println!("{:?}", password);
+
+        println!("{}", server.port);
     }
-
-    let hostname = String::from("fawn.pwnwriter.xyz");
-    let username = String::from("fawn");
-    let port = 22;
-
-    // ssh::connect_via_password(hostname, username, Some(port));
 
     if cli.inspect {
         inspect::inspect_available();

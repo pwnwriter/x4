@@ -1,7 +1,10 @@
 use colored::Colorize;
 use miette::{Context, IntoDiagnostic, Result};
 use serde::{Deserialize, Serialize};
-use std::{fs, path::Path};
+use std::{
+    env, fs,
+    path::{Path, PathBuf},
+};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -14,54 +17,45 @@ pub struct Pipeline {
 pub struct Server {
     pub name: String,
     pub host: String,
+    #[serde(default = "default_port")]
     pub port: i64,
     pub user: String,
     #[serde(rename = "private_key")]
-    pub private_key: String,
-    pub timeout: i64,
-    #[serde(rename = "useSSHAgent")]
-    pub use_sshagent: bool,
-    pub commands: Vec<Command>,
+    pub private_key: Option<String>,
+    #[serde(rename = "password")]
+    pub password: Option<String>,
+    pub commands: Vec<String>,
+    pub description: Option<String>,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Command {
-    pub description: String,
-    pub command: String,
-    pub env: Env,
-    pub working_directory: String,
-    pub output_handling: OutputHandling,
-    pub error_handling: ErrorHandling,
-    pub ssh_options: Vec<String>,
-    pub sudo: Sudo,
+impl Server {
+    pub fn resolve_private_key(&self) -> Result<Option<PathBuf>> {
+        self.resolve_env_variable(&self.private_key)
+            .map(|opt| opt.map(PathBuf::from))
+    }
+
+    pub fn resolve_password(&self) -> Result<Option<String>> {
+        self.resolve_env_variable(&self.password)
+    }
+
+    fn resolve_env_variable(&self, var: &Option<String>) -> Result<Option<String>> {
+        if let Some(ref value) = var {
+            if value.starts_with("env:") {
+                let var_name = value.strip_prefix("env:").unwrap();
+                env::var(var_name)
+                    .map(Some)
+                    .map_err(|_| miette::miette!("Environment variable {} not found", var_name))
+            } else {
+                Ok(Some(value.clone()))
+            }
+        } else {
+            Ok(None)
+        }
+    }
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Env {
-    #[serde(rename = "VAR1")]
-    pub var1: Option<String>,
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct OutputHandling {
-    pub save_to_file: String,
-    pub return_output: bool,
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ErrorHandling {
-    pub retries: i64,
-    pub log_errors: bool,
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Sudo {
-    pub enabled: bool,
+fn default_port() -> i64 {
+    22
 }
 
 pub fn parse_pipeline(pipeline_file: &Path) -> Result<Pipeline> {
@@ -69,87 +63,14 @@ pub fn parse_pipeline(pipeline_file: &Path) -> Result<Pipeline> {
         .into_diagnostic()
         .wrap_err_with(|| {
             format!(
-                "Cannot read {} at {}. Please provide a valid file path.",
-                pipeline_file.display().to_string().bold(),
-                std::env::current_dir()
-                    .unwrap()
-                    .display()
-                    .to_string()
-                    .bold()
+                "Cannot read {}. Please provide a valid file path.",
+                pipeline_file.display().to_string().bright_cyan().bold()
             )
         })?;
 
     let pipeline: Pipeline = serde_json::from_str(&contents)
         .into_diagnostic()
-        .wrap_err("Failed to parse json content")?;
+        .wrap_err("Failed to parse JSON content")?;
 
     Ok(pipeline)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_parse_pipeline_valid_json() {
-        let pipeline_file_path = "examples/sxm.json";
-
-        let pipeline =
-            parse_pipeline(pipeline_file_path.as_ref()).expect("Failed to parse pipeline");
-
-        println!("{:#?}", pipeline);
-        assert_eq!(pipeline.servers.len(), 2);
-
-        // Server 1
-        assert_eq!(pipeline.servers[0].name, "server1");
-        assert_eq!(pipeline.servers[0].host, "192.168.1.1");
-        assert_eq!(pipeline.servers[0].port, 22);
-        assert_eq!(pipeline.servers[0].user, "username");
-        assert_eq!(pipeline.servers[0].private_key, "/path/to/private/key");
-        assert_eq!(pipeline.servers[0].timeout, 30);
-        assert_eq!(pipeline.servers[0].use_sshagent, false);
-        assert_eq!(pipeline.servers[0].commands.len(), 2);
-        assert_eq!(
-            pipeline.servers[0].commands[0].description,
-            "List directory contents"
-        );
-        assert_eq!(pipeline.servers[0].commands[0].command, "ls -l");
-        assert_eq!(
-            pipeline.servers[0].commands[0].env.var1,
-            Some("value1".to_string())
-        );
-        assert_eq!(
-            pipeline.servers[0].commands[0].working_directory,
-            "/home/username"
-        );
-        assert_eq!(pipeline.servers[0].commands[1].description, "Show hostname");
-        assert_eq!(pipeline.servers[0].commands[1].command, "cat /etc/hostname");
-
-        // Server 2
-        assert_eq!(pipeline.servers[1].name, "server2");
-        assert_eq!(pipeline.servers[1].host, "192.168.1.2");
-        assert_eq!(pipeline.servers[1].port, 22);
-        assert_eq!(pipeline.servers[1].user, "anotheruser");
-        assert_eq!(
-            pipeline.servers[1].private_key,
-            "/path/to/another/private/key"
-        );
-        assert_eq!(pipeline.servers[1].timeout, 30);
-        assert_eq!(pipeline.servers[1].use_sshagent, false);
-        assert_eq!(pipeline.servers[1].commands.len(), 2);
-        assert_eq!(
-            pipeline.servers[1].commands[0].description,
-            "Display disk usage"
-        );
-        assert_eq!(pipeline.servers[1].commands[0].command, "df -h");
-        assert_eq!(
-            pipeline.servers[1].commands[0].env.var1,
-            Some("value1".to_string())
-        );
-        assert_eq!(
-            pipeline.servers[1].commands[1].description,
-            "Show system uptime"
-        );
-        assert_eq!(pipeline.servers[1].commands[1].command, "uptime");
-    }
 }

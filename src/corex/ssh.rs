@@ -2,6 +2,7 @@ use ssh2::Session;
 use std::io::Read;
 use std::net::TcpStream;
 
+#[allow(dead_code)]
 pub fn connect_via_password(host: String, user: String, port: Option<i64>) {
     let port = port.unwrap_or(22);
     let address = format!("{}:{}", host, port);

@@ -1,114 +1,51 @@
 {
   "servers": [
     {
-      "name": "server1",
-      "host": "192.168.1.1",
-      "port": 22,
-      "user": "username",
-      "private_key": "/path/to/private/key",
-      "timeout": 30,
-      "useSSHAgent": false,
+      "name": "ec2",
+      "host": "fawn.pwnwriter.xyz",
+      "user": "fawn",
+      "private_key": "~/.local/share/ssh/wynwood.pem",
       "commands": [
-        {
-          "description": "List directory contents",
-          "command": "ls -l",
-          "env": {
-            "VAR1": "value1"
-          },
-          "workingDirectory": "/home/username",
-          "outputHandling": {
-            "saveToFile": "/path/to/output1.txt",
-            "returnOutput": true
-          },
-          "errorHandling": {
-            "retries": 3,
-            "logErrors": true
-          },
-          "sshOptions": [
-            "-o StrictHostKeyChecking=no",
-            "-v"
-          ],
-          "sudo": {
-            "enabled": false
-          }
-        },
-        {
-          "description": "Show hostname",
-          "command": "cat /etc/hostname",
-          "env": {},
-          "workingDirectory": "/home/username",
-          "outputHandling": {
-            "saveToFile": "/path/to/output2.txt",
-            "returnOutput": true
-          },
-          "errorHandling": {
-            "retries": 3,
-            "logErrors": true
-          },
-          "sshOptions": [
-            "-o StrictHostKeyChecking=no",
-            "-v"
-          ],
-          "sudo": {
-            "enabled": false
-          }
-        }
-      ]
+        "ls -l",
+        "cat /etc/hostname"
+      ],
+      "description": "using a private key for SSH authentication and default 22 port"
     },
     {
       "name": "server2",
       "host": "192.168.1.2",
-      "port": 22,
+      "port": 69,
       "user": "anotheruser",
-      "private_key": "/path/to/another/private/key",
-      "timeout": 30,
-      "useSSHAgent": false,
+      "password": "mysecurepassword",
       "commands": [
-        {
-          "description": "Display disk usage",
-          "command": "df -h",
-          "env": {
-            "VAR1": "value1"
-          },
-          "workingDirectory": "/home/anotheruser",
-          "outputHandling": {
-            "saveToFile": "/path/to/output3.txt",
-            "returnOutput": true
-          },
-          "errorHandling": {
-            "retries": 3,
-            "logErrors": true
-          },
-          "sshOptions": [
-            "-o StrictHostKeyChecking=no",
-            "-v"
-          ],
-          "sudo": {
-            "enabled": false
-          }
-        },
-        {
-          "description": "Show system uptime",
-          "command": "uptime",
-          "env": {},
-          "workingDirectory": "/home/anotheruser",
-          "outputHandling": {
-            "saveToFile": "/path/to/output4.txt",
-            "returnOutput": true
-          },
-          "errorHandling": {
-            "retries": 3,
-            "logErrors": true
-          },
-          "sshOptions": [
-            "-o StrictHostKeyChecking=no",
-            "-v"
-          ],
-          "sudo": {
-            "enabled": false
-          }
-        }
-      ]
+        "df -h",
+        "uptime"
+      ],
+      "description": "using a direct password for SSH authentication."
+    },
+    {
+      "name": "private_key_env",
+      "host": "private.server.com",
+      "port": 22,
+      "user": "privateuser",
+      "private_key": "env:PRIVATE_KEY",
+      "commands": [
+        "whoami",
+        "df -h"
+      ],
+      "description": "using a private key sourced from an environment variable."
+    },
+    {
+      "name": "password_env",
+      "host": "password.server.com",
+      "port": 22,
+      "user": "userpassword",
+      "password": "env:SERVER_PASSWORD",
+      "commands": [
+        "ls -la",
+        "uptime"
+      ],
+      "description": "using a password sourced from an environment variable."
     }
   ]
 }

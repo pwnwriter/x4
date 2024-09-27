@@ -10,6 +10,5 @@ pub fn inspect_available() {
 
     for identity in agent.identities().unwrap() {
         println!("{}", identity.comment());
-        let pubkey = identity.blob();
     }
 }
