@@ -4,10 +4,10 @@ use sxm::corex::parser::parse_pipeline;
 
 #[test]
 fn test_parse_pipeline() -> Result<()> {
-    // Define the path to the JSON file
-    let pipeline_file_path = Path::new("./examples/sxm.json");
+    let pipeline_path = "./examples/sxm.json".to_string();
 
-    // Call the function to parse the pipeline
+    let pipeline_file_path = Path::new(&pipeline_path);
+
     let pipeline = parse_pipeline(pipeline_file_path)?;
 
     assert_eq!(pipeline.servers.len(), 4);
@@ -19,7 +19,6 @@ fn test_parse_pipeline() -> Result<()> {
     assert_eq!(first_server.port, 22);
     assert_eq!(first_server.commands.len(), 2);
 
-    // Check the commands of the first server
     assert_eq!(first_server.commands[0], "ls -l");
     assert_eq!(first_server.commands[1], "cat /etc/hostname");
 
