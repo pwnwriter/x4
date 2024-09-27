@@ -69,14 +69,19 @@ pub fn parse_pipeline(pipeline_file: &Path) -> Result<Pipeline> {
         .into_diagnostic()
         .wrap_err_with(|| {
             format!(
-                "Failed to read pipeline file: {}",
-                pipeline_file.display().to_string().bold()
+                "Cannot read {} at {}. Please provide a valid file path.",
+                pipeline_file.display().to_string().bold(),
+                std::env::current_dir()
+                    .unwrap()
+                    .display()
+                    .to_string()
+                    .bold()
             )
         })?;
 
     let pipeline: Pipeline = serde_json::from_str(&contents)
         .into_diagnostic()
-        .wrap_err("Failed to parse the JSON content into a Pipeline struct")?;
+        .wrap_err("Failed to parse json content")?;
 
     Ok(pipeline)
 }

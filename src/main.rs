@@ -11,8 +11,7 @@ fn main() -> Result<()> {
     let cli = args::Cli::parse();
     let pipeline_file_path = cli.pipeline_file;
     let path = Path::new(&pipeline_file_path);
-    let pipeline =
-        parse_pipeline(path).context("Failed to parse the pipeline from the given JSON file")?;
+    let pipeline = parse_pipeline(path).context("Pipeline parsing failed")?;
 
     for server in pipeline.servers {
         println!("{:?}", server.name);
