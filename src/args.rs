@@ -12,8 +12,16 @@ use colored::Colorize;
 )]
 pub struct Cli {
     /// Pipeline file path
-    #[arg(short, long, default_value = "sxm.json")]
-    pub pipeline_file: PathBuf,
+    #[arg(long, default_value = "sxm.json")]
+    pub pipeline: PathBuf,
+
+    /// Check pipeline
+    #[arg(long)]
+    pub check_pipeline: bool,
+
+    /// Connect and request a list of identities
+    #[arg(long)]
+    pub inspect: bool,
 }
 
 pub fn splash() -> String {
@@ -25,7 +33,8 @@ pub fn splash() -> String {
      ┗┓┓┏┃┃┃
      ┗┛┛┗┛ ┗{}
              @pwnwriter/sxm
- "#,
+ 
+        "#,
         sxm_version
     )
     .purple();
