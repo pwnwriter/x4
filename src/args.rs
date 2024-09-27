@@ -12,22 +12,21 @@ use colored::Colorize;
 )]
 pub struct Cli {
     /// Pipeline file path
-    #[arg(short, long, default_value = "sshy.json")]
+    #[arg(short, long, default_value = "sxm.json")]
     pub pipeline_file: PathBuf,
 }
 
 pub fn splash() -> String {
-    let hxn_version = env!("CARGO_PKG_VERSION");
+    let sxm_version = env!("CARGO_PKG_VERSION");
 
     let logo = format!(
-        r#"
-      ┏┓┏┓┓┏  
-      ┗┓┗┓┣┫┓┏
-      ┗┛┗┛┛┗┗┫
-             ┛{}
-             @pwnwriter/sshy
+         r#"
+     ┏┓  ┳┳┓
+     ┗┓┓┏┃┃┃
+     ┗┛┛┗┛ ┗{}
+             @pwnwriter/sxm
  "#,
-        hxn_version
+        sxm_version
     )
     .purple();
 

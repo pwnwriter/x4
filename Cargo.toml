@@ -1,13 +1,13 @@
 [package]
-name = "sshy"
+name = "sxm"
 version = "0.1.0"
 authors = ["pwnwriter <hey@pwnwriter.xyz>"]
 description = ""
 edition = "2021"
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/pwnwriter/sshy"
-repository = "https://github.com/pwnwriter/sshy"
+homepage = "https://github.com/pwnwriter/sxm"
+repository = "https://github.com/pwnwriter/sxm"
 keywords = ["ssh", "ssh-command", "cli"]
 categories = ["command-line-utilities"]
 include = [

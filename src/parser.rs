@@ -92,7 +92,7 @@ mod tests {
 
     #[test]
     fn test_parse_pipeline_valid_json() {
-        let pipeline_file_path = "examples/sshy.json";
+        let pipeline_file_path = "examples/sxm.json";
 
         let pipeline =
             parse_pipeline(pipeline_file_path.as_ref()).expect("Failed to parse pipeline");

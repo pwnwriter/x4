@@ -517,18 +517,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "sshy"
-version = "0.1.0"
-dependencies = [
- "clap",
- "colored",
- "miette",
- "serde",
- "serde_json",
- "ssh2",
-]
-
-[[package]]
 name = "strsim"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -554,6 +542,18 @@ name = "supports-unicode"
 version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b7401a30af6cb5818bb64852270bb722533397edcfc7344954a38f420819ece2"
+
+[[package]]
+name = "sxm"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "colored",
+ "miette",
+ "serde",
+ "serde_json",
+ "ssh2",
+]
 
 [[package]]
 name = "syn"

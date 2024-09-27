@@ -14,7 +14,9 @@ pub fn connect_via_password(host: String, user: String, port: Option<i64>) {
 
     let mut channel = sess.channel_session().unwrap();
 
-    channel.exec("mkdir -p hello && ls && pwd && whoami && wh && pnpm").unwrap();
+    channel
+        .exec("mkdir -p hello && ls && pwd && whoami && wh && pnpm")
+        .unwrap();
 
     let mut stdout = String::new();
     channel.read_to_string(&mut stdout).unwrap();

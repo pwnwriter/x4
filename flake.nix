@@ -46,7 +46,7 @@
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
 
       packages = forAllSystems (pkgs: {
-        sshy =
+        sxm =
           with pkgs;
           let
             fs = lib.fileset;
@@ -98,14 +98,14 @@
 
           };
 
-        default = self.packages.${pkgs.system}.sshy;
+        default = self.packages.${pkgs.system}.sxm;
 
       });
 
       apps = forAllSystems (pkgs: {
         default = {
           type = "app";
-          program = "${self.packages.${pkgs.system}.sshy}/bin/sshy";
+          program = "${self.packages.${pkgs.system}.sxm}/bin/sxm";
         };
       });
     };
