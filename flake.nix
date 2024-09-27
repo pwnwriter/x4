@@ -1,111 +1,112 @@
 {
   description = "Execute shell command, (down/up)load files to a server via ssh protocol";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  };
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
   outputs =
-    { self, nixpkgs }:
+    { self, nixpkgs, ... }:
     let
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      forAllSystems =
+        function:
+        nixpkgs.lib.genAttrs [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ] (system: function nixpkgs.legacyPackages.${system});
 
       darwinDeps =
-        pkgs: with pkgs; [
-          darwin.apple_sdk.frameworks.Cocoa
+        pkgs:
+        with pkgs;
+        with pkgs.darwin.apple_sdk.frameworks;
+        [
+          Cocoa
           libiconv
         ];
 
-      cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
-
+      cargoToml = with builtins; (fromTOML (readFile ./Cargo.toml));
     in
     {
-      packages = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          sshy =
-            let
-              pname = cargoToml.package.name;
-              version = cargoToml.package.version;
-              cargoLock = {
-                lockFile = ./Cargo.lock;
-              };
-            in
-            pkgs.rustPlatform.buildRustPackage {
-              inherit pname version cargoLock;
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShell {
+          name = "dev-shell";
+          packages =
+            (with pkgs; [
+              cmake
+            ])
+            ++ (pkgs.lib.optional pkgs.stdenvNoCC.isDarwin (darwinDeps pkgs));
 
-              # Use the current source directory
-              src = ./.;
+          shellHook = ''
+            export PATH="$PATH:target/debug"
+          '';
 
-              nativeBuildInputs = with pkgs; [
-                clippy
-                rustfmt
-                openssl
-                pkg-config
-                cmake
-                perl
-              ];
+        };
+      });
 
-              buildInputs = pkgs.lib.optional (pkgs.stdenv.isDarwin) (darwinDeps pkgs);
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
 
-              # Build phases
-              buildPhase = ''
-                cargo build --release --frozen --locked
-              '';
+      packages = forAllSystems (pkgs: {
+        sshy =
+          with pkgs;
+          let
+            fs = lib.fileset;
+            sourceFiles = fs.unions [
+              ./Cargo.lock
+              ./Cargo.toml
+              ./src
+              ./examples
+            ];
 
-              checkPhase = ''
-                cargo test --verbose
-              '';
+            cargoLock.lockFile = ./Cargo.lock;
+            pname = cargoToml.package.name;
+            version = cargoToml.package.version;
 
-              installPhase = ''
-                mkdir -p $out/bin
-                cp target/release/sshy $out/bin/
-              '';
+            darwinBuildInputs = (darwinDeps pkgs);
+          in
 
+          pkgs.rustPlatform.buildRustPackage {
+
+            inherit pname version cargoLock;
+
+            src = fs.toSource {
+              root = ./.;
+              fileset = sourceFiles;
             };
-        }
-      );
 
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          default = pkgs.mkShell {
-            name = "dev-shell";
-            packages = [
-              pkgs.cmake
-            ] ++ (pkgs.lib.optional pkgs.stdenvNoCC.isDarwin (darwinDeps pkgs));
+            nativeBuildInputs = [
+              clippy
+              rustfmt
+              openssl
+              pkg-config
+              cmake
+              perl
+            ];
 
-            shellHook = ''
-              export PATH="$PATH:target/debug"
+            buildInputs = lib.optionals stdenv.isDarwin darwinBuildInputs;
+
+            cargoFmt = ''
+              cargo fmt --manifest-path ./Cargo.toml --all --check
             '';
-          };
-        }
-      );
 
-      apps = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          default = {
-            type = "app";
-            program = "${self.packages.${system}.sshy}/bin/sshy";
+            clippy = ''
+              cargo clippy -- --deny warnings
+            '';
+
+            preBuildPhases = [ "cargoFmt" ];
+
+            preInstallPhases = [ "clippy" ];
+
           };
-        }
-      );
+
+        default = self.packages.${pkgs.system}.sshy;
+
+      });
+
+      apps = forAllSystems (pkgs: {
+        default = {
+          type = "app";
+          program = "${self.packages.${pkgs.system}.sshy}/bin/sshy";
+        };
+      });
     };
 }
