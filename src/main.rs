@@ -1,5 +1,7 @@
 mod args;
+mod engine;
 mod parser;
+
 use clap::Parser;
 use miette::{Context, Result};
 use parser::parse_pipeline;
@@ -15,6 +17,12 @@ fn main() -> Result<()> {
     for server in pipeline.servers {
         println!("{:?}", server.name);
     }
+
+    let hostname = String::from("fawn.pwnwriter.xyz");
+    let username = String::from("fawn");
+    let port = 22;
+
+    engine::ssh::connect_via_password(hostname, username, Some(port));
 
     Ok(())
 }
