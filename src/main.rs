@@ -1,5 +1,5 @@
 mod args;
-mod engine;
+mod corex;
 mod parser;
 
 use clap::Parser;
@@ -21,7 +21,7 @@ fn main() -> Result<()> {
     let username = String::from("fawn");
     let port = 22;
 
-    engine::ssh::connect_via_password(hostname, username, Some(port));
+    corex::ssh::connect_via_password(hostname, username, Some(port));
 
     Ok(())
 }
