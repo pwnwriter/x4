@@ -22,7 +22,6 @@ pub struct Cli {
     /// Check pipeline configuration
     #[arg(long)]
     pub check_pipeline: bool,
-
 }
 
 pub fn splash() -> String {

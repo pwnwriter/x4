@@ -1,11 +1,10 @@
-mod args;
 mod corex;
-mod parser;
+mod exec;
 
 use clap::Parser;
-use corex::inspect;
+use corex::parser::parse_pipeline;
+use corex::{args, inspect, ssh};
 use miette::{Context, Result};
-use parser::parse_pipeline;
 use std::path::Path;
 
 fn main() -> Result<()> {
@@ -34,5 +33,10 @@ fn main() -> Result<()> {
         inspect::inspect_available();
     }
 
+    // tracing_subscriber::fmt()
+    //     .with_max_level(tracing::Level::TRACE)
+    //     .init();
+
+    ssh::connect_via_password("44.202.26.95".to_string(), "fawn".to_string(), Some(22));
     Ok(())
 }

@@ -1,17 +1,20 @@
 {
   "servers": [
     {
+      "description": "using a private key for SSH authentication and default 22 port",
       "name": "ec2",
       "host": "fawn.pwnwriter.xyz",
       "user": "fawn",
       "private_key": "~/.local/share/ssh/wynwood.pem",
+      "tracing": true,
       "commands": [
         "ls -l",
         "cat /etc/hostname"
-      ],
-      "description": "using a private key for SSH authentication and default 22 port"
+      ]
     },
+
     {
+      "description": "using a direct password for SSH authentication.",
       "name": "server2",
       "host": "192.168.1.2",
       "port": 69,
@@ -20,32 +23,33 @@
       "commands": [
         "df -h",
         "uptime"
-      ],
-      "description": "using a direct password for SSH authentication."
+      ]
     },
     {
+      "description": "using a private key sourced from an environment variable.",
       "name": "private_key_env",
       "host": "private.server.com",
       "port": 22,
       "user": "privateuser",
       "private_key": "env:PRIVATE_KEY",
+      "tracing": true,
       "commands": [
         "whoami",
         "df -h"
-      ],
-      "description": "using a private key sourced from an environment variable."
+      ]
     },
     {
+      "description": "using a password sourced from an environment variable.",
       "name": "password_env",
       "host": "password.server.com",
       "port": 22,
       "user": "userpassword",
       "password": "env:SERVER_PASSWORD",
+      "tracing": false,
       "commands": [
         "ls -la",
         "uptime"
-      ],
-      "description": "using a password sourced from an environment variable."
+      ]
     }
   ]
 }
