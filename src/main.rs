@@ -1,9 +1,10 @@
 mod corex;
+use std::path::Path;
 mod exec;
 
 use clap::Parser;
-use miette::{Context, Result};
-use std::path::Path;
+use miette::Context;
+use miette::Result;
 use sxm::args;
 use sxm::parser::parse_pipeline;
 
@@ -16,7 +17,7 @@ fn main() -> Result<()> {
 
     let pipeline = parse_pipeline(path).context("Pipeline parsing failed")?;
 
-    exec::run_app(pipeline, cli)?;
+    exec::run_app(cli, pipeline)?;
 
     Ok(())
 }

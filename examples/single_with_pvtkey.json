@@ -1,0 +1,17 @@
+{
+  "servers": [
+    {
+      "description": "using a private key for SSH authentication and default 22 port",
+      "name": "ec2",
+      "host": "fawn.pwnwriter.xyz",
+      "user": "fawn",
+      "private_key": "/Users/pwnwriter/.local/share/ssh/wynwood.pem",
+      "tracing": true,
+      "commands": [
+        "mkdir pwned",
+        "mkdir hllo"
+      ]
+    }
+  ]
+}
+

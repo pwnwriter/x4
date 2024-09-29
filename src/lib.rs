@@ -3,5 +3,4 @@
 //! Copyright (c) pwnwriter <hey@pwnwriter.xyz>
 
 pub mod corex;
-
 pub use corex::{args, parser, ssh};

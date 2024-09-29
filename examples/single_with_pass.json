@@ -1,0 +1,18 @@
+{
+  "servers": [
+    {
+      "description": "using a private key for SSH authentication and default 22 port",
+      "name": "ec2",
+      "host": "fawn.pwnwriter.xyz",
+      "user": "wolf",
+      "password": "env:wolf_pass",
+      "tracing": true,
+      "commands": [
+        "echo 'Hello, World!'",
+        "mkdir pwned001",
+        "cat /etc/hostname"
+      ]
+    }
+  ]
+}
+
