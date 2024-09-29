@@ -8,6 +8,10 @@ use tracing::info;
 
 pub fn run_app(cli: Cli, pipeline: Pipeline) -> Result<()> {
     for server in pipeline.servers {
+        tracing_subscriber::fmt()
+            .with_max_level(tracing::Level::TRACE)
+            .init();
+
         println!("Processing server: {}", server.name);
 
         // Retrieve private key path
