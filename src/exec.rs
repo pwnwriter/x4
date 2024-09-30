@@ -8,7 +8,7 @@ use tracing::info;
 
 pub fn run_app(cli: Cli, pipeline: Pipeline) -> Result<()> {
     for server in pipeline.servers {
-        println!("Processing server: {}", server.name);
+        info!("Processing server: {}", server.name);
 
         // Retrieve private key path
         let private_key_path = server

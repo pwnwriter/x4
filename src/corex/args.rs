@@ -9,21 +9,21 @@ use colored::Colorize;
     version,
     about = splash(),
     propagate_version = true,
+    arg_required_else_help = true
 )]
 pub struct Cli {
-    /// Pipeline file path
-    #[arg(long, default_value = "sxm.json")]
+    /// Path to your pipeline file
+    #[arg(short, long)]
     pub pipeline: PathBuf,
 
     /// Connect and request a list of identities
     #[arg(long)]
     pub inspect: bool,
 
-    /// Check pipeline configuration
+    /// Check the configuration of the specified pipeline.
     #[arg(long)]
     pub check_pipeline: bool,
 }
-
 pub fn splash() -> String {
     let sxm_version = env!("CARGO_PKG_VERSION");
 

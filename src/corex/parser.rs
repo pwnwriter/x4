@@ -7,6 +7,8 @@ use std::{
     process::Command,
 };
 
+// TODO: Remove all dead code warning
+
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Pipeline {
@@ -33,6 +35,7 @@ pub struct Server {
     pub description: Option<String>,
 }
 
+#[allow(dead_code)]
 pub trait PasswordRetriever {
     fn retrive_password(&self) -> Result<Option<String>>;
 }
@@ -75,6 +78,7 @@ fn execute_command(command: &str) -> Result<Option<String>> {
     }
 }
 
+#[allow(dead_code)]
 impl Server {
     pub fn get_private_key(&self) -> Result<Option<PathBuf>> {
         self.get_env_variable(&self.private_key)
@@ -101,6 +105,7 @@ fn default_port() -> i64 {
     22
 }
 
+#[allow(dead_code)]
 pub fn parse_pipeline(pipeline_file: &Path) -> Result<Pipeline> {
     let contents = fs::read_to_string(pipeline_file)
         .into_diagnostic()
