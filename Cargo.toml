@@ -2,7 +2,7 @@
 name = "sxm"
 version = "0.1.0"
 authors = ["pwnwriter <hey@pwnwriter.xyz>"]
-description = ""
+description = "Execute shell commands, (down/up)load files to a server via ssh protocol"
 edition = "2021"
 license = "MIT"
 readme = "README.md"

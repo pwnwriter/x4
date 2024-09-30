@@ -1,5 +1,5 @@
 {
-  description = "Execute shell command, (down/up)load files to a server via ssh protocol";
+  description = "Execute shell commands, (down/up)load files to a server via ssh protocol";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
