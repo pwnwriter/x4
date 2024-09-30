@@ -37,7 +37,7 @@
             ++ (pkgs.lib.optional pkgs.stdenvNoCC.isDarwin (darwinDeps pkgs));
 
           shellHook = ''
-            export PATH="$PATH:target/debug"
+            export PATH="$PATH:$(pwd)/target/debug"
           '';
 
         };
