@@ -145,6 +145,6 @@ pub fn execute_commands(session: &mut Session, commands: Vec<String>) {
             eprintln!("STDERR: {}", stderr);
         }
 
-        println!("Exit Status for '{}': {}", command, exit_status);
+        println!("{}: {}", command, exit_status);
     }
 }
