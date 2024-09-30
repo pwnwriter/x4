@@ -1,0 +1,43 @@
+{
+  "servers": [
+    {
+      "description": "using a private key for SSH authentication and default 22 port",
+      "name": "ec2",
+      "host": "fawn.pwnwriter.xyz",
+      "user": "fawn",
+      "password": "env:wolf_pass",
+      "commands": [
+        "ls -l",
+        "cat /etc/hostname"
+      ]
+    },
+    {
+      "description": "another server description",
+      "name": "server2",
+      "host": "example.com",
+      "user": "user2",
+      "commands": [
+        "echo 'Hello from server2'"
+      ]
+    },
+    {
+      "description": "yet another server description",
+      "name": "server3",
+      "host": "example2.com",
+      "user": "user3",
+      "commands": [
+        "echo 'Hello from server3'"
+      ]
+    },
+    {
+      "description": "last server description",
+      "name": "server4",
+      "host": "example3.com",
+      "user": "user4",
+      "commands": [
+        "echo 'Hello from server4'"
+      ]
+    }
+  ]
+}
+
