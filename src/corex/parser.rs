@@ -69,11 +69,11 @@ fn execute_command(command: &str) -> Result<Option<String>> {
 
     if output.status.success() {
         let stdout = String::from_utf8(output.stdout)
-            .map_err(|e| miette::miette!("Failed to convert stdout to string: {}", e))?;
+            .map_err(|e| miette::miette!("Failed to convert stdout to string: {e}"))?;
         Ok(Some(stdout.trim().to_string()))
     } else {
         let stderr = String::from_utf8(output.stderr)
-            .map_err(|e| miette::miette!("Failed to convert stderr to string: {}", e))?;
+            .map_err(|e| miette::miette!("Failed to convert stderr to string: {e}"))?;
         Err(miette::miette!("Command failed: {}", stderr))
     }
 }
@@ -91,7 +91,7 @@ impl Server {
                 let var_name = value.strip_prefix("env:").unwrap();
                 env::var(var_name)
                     .map(Some)
-                    .map_err(|_| miette::miette!("Environment variable {} not found", var_name))
+                    .map_err(|_| miette::miette!("Environment variable {var_name} not found"))
             } else {
                 Ok(Some(value.clone()))
             }

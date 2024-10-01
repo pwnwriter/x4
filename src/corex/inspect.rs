@@ -1,5 +1,6 @@
 use ssh2::Session;
 
+#[allow(dead_code)]
 pub fn inspect_available() {
     let sess = Session::new().unwrap();
     let mut agent = sess.agent().unwrap();
