@@ -34,7 +34,7 @@
             (with pkgs; [
               cmake
             ])
-            ++ (pkgs.lib.optional pkgs.stdenvNoCC.isDarwin (darwinDeps pkgs));
+            ++ (pkgs.lib.optional pkgs.stdenv.isDarwin (darwinDeps pkgs));
 
           shellHook = ''
             export PATH="$PATH:$(pwd)/target/debug"
