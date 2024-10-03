@@ -6,8 +6,8 @@ use clap::Parser;
 use miette::Context;
 use miette::Result;
 use sxm::args;
+use sxm::helpers::setup_logging;
 use sxm::parser::parse_pipeline;
-use sxm::setup_logging;
 
 fn main() -> Result<()> {
     let cli = args::Cli::parse();
