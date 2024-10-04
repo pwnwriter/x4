@@ -14,3 +14,16 @@ The configuration JSON supports the following key values for server definitions:
 | `user`      | The username for SSH authentication.                        | "fawn"                        |
 | `password`  | The method of authentication. Can be an environment variable (prefix with `env:`) or a command (prefix with `cmd:`). | "env:wolf_pass" or "cmd:pass uni/server/wolf" |
 | `commands`  | An array of commands to be executed after SSH connection.   | ["ls -l", "cat /etc/hostname"] |
+
+
+### Development
+
+If you are using Nix, 
+
+Get into the development shell 
+
+`$ nix develop` or use 
+
+`$ direnv allow` to enter a shell with all required deps. 
+
+`$ nix build/run` to build and run the app. 
