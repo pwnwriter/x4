@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use clap::{Args, Parser};
+use clap::Parser;
 use colored::Colorize;
 
 #[derive(Debug, Parser, Clone)]
@@ -23,21 +23,6 @@ pub struct Cli {
     /// Check the configuration of the specified pipeline.
     #[arg(long)]
     pub check_pipeline: bool,
-
-    #[command(flatten)]
-    pub file: File,
-}
-
-#[derive(Debug, Args, Clone)]
-#[group(required = false, multiple = false)]
-pub struct File {
-    /// Local file path to upload/download
-    #[arg(short, long)]
-    pub from: Option<String>,
-
-    /// Remote path to the file
-    #[arg(short, long)]
-    pub to: Option<String>,
 }
 
 pub fn splash() -> String {

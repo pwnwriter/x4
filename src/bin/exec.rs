@@ -1,10 +1,15 @@
-use crate::corex::ssh::{connect_with_password, connect_with_private_key};
 use miette::{Context, Result};
 use sxm::{
-    corex::{args::Cli, inspect},
-    parser::{PasswordRetriever, Pipeline},
+    configuration::{PasswordRetriever, Pipeline},
+    engine::{args::Cli, inspect},
+    ssh::{connect_with_password, connect_with_private_key},
 };
 use tracing::info;
+
+use clap::Parser;
+use sxm::engine::args;
+use sxm::engine::configuration::parse_pipeline;
+use sxm::helpers::setup_logging;
 
 pub fn run_app(cli: Cli, pipeline: Pipeline) -> Result<()> {
     for server in pipeline.servers {
@@ -46,6 +51,25 @@ pub fn run_app(cli: Cli, pipeline: Pipeline) -> Result<()> {
 
     if cli.inspect {
         inspect::inspect_available();
+    }
+
+    Ok(())
+}
+
+fn main() -> Result<()> {
+    let cli = args::Cli::parse();
+
+    setup_logging()?;
+
+    match cli.pipeline {
+        Some(ref pipeline_file_path) => {
+            let pipeline = parse_pipeline(pipeline_file_path).context("Pipeline parsing failed")?;
+
+            run_app(cli.clone(), pipeline)?;
+        }
+        None => {
+            println!("This is something");
+        }
     }
 
     Ok(())

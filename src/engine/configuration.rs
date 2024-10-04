@@ -99,7 +99,7 @@ impl Server {
     }
 }
 
-fn default_port() -> i64 {
+pub fn default_port() -> i64 {
     22
 }
 

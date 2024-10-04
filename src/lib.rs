@@ -2,8 +2,8 @@
 //!
 //! Copyright (c) pwnwriter <hey@pwnwriter.xyz>
 
-pub mod corex;
-pub use corex::{args, parser, ssh};
+pub mod engine;
+pub use engine::{args, configuration, ssh};
 
 pub mod helpers {
     use miette::Result;

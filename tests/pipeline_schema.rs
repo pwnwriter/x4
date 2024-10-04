@@ -1,6 +1,6 @@
 use miette::Result;
 use std::path::Path;
-use sxm::corex::parser::parse_pipeline;
+use sxm::engine::configuration::parse_pipeline;
 
 #[test]
 fn test_parse_pipeline() -> Result<()> {
