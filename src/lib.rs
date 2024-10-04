@@ -1,4 +1,4 @@
-//! sxm: Execute shell commands, (down/up)load files to a server via ssh protocol
+//! sxm: Execute shell commands to a server via ssh protocol
 //!
 //! Copyright (c) pwnwriter <hey@pwnwriter.xyz>
 
