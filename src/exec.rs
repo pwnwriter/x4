@@ -17,7 +17,7 @@ pub fn run_app(cli: Cli, pipeline: Pipeline) -> Result<()> {
             .map(|path| path.to_string_lossy().into_owned());
 
         if let Some(password) = server
-            .retrive_password()
+            .retrieve_password()
             .context("Failed to get password")?
         {
             connect_with_password(

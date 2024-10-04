@@ -16,6 +16,7 @@
       "name": "server2",
       "host": "example.com",
       "user": "user2",
+      "password": "cmd:pass uni/server/wolf",
       "commands": [
         "echo 'Hello from server2'"
       ]

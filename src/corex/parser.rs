@@ -7,7 +7,7 @@ use std::{
     process::Command,
 };
 
-// TODO: Remove all dead code warning
+// TODO: Remove all dead code warnings
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -37,25 +37,23 @@ pub struct Server {
 
 #[allow(dead_code)]
 pub trait PasswordRetriever {
-    fn retrive_password(&self) -> Result<Option<String>>;
+    fn retrieve_password(&self) -> Result<Option<String>>;
 }
 
 impl PasswordRetriever for Server {
-    fn retrive_password(&self) -> Result<Option<String>> {
-        if let Some(ref password) = self.password {
-            if password.starts_with("cmd:") {
-                let command = password.strip_prefix("cmd:").unwrap();
-                return execute_command(command);
-            } else if password.starts_with("env:") {
-                let var_name = password.strip_prefix("env:").unwrap();
-                return env::var(var_name)
-                    .map(Some)
-                    .map_err(|_| miette::miette!("Environment variable {} not found", var_name));
-            } else {
-                return Ok(Some(password.clone()));
-            }
+    fn retrieve_password(&self) -> Result<Option<String>> {
+        match &self.password {
+            Some(password) => match password.strip_prefix("cmd:") {
+                Some(command) => execute_command(command),
+                None => match password.strip_prefix("env:") {
+                    Some(var_name) => env::var(var_name).map(Some).map_err(|_| {
+                        miette::miette!("Environment variable {} not found", var_name)
+                    }),
+                    None => Ok(Some(password.clone())),
+                },
+            },
+            None => Ok(None),
         }
-        Ok(None)
     }
 }
 
@@ -91,7 +89,7 @@ impl Server {
                 let var_name = value.strip_prefix("env:").unwrap();
                 env::var(var_name)
                     .map(Some)
-                    .map_err(|_| miette::miette!("Environment variable {var_name} not found"))
+                    .map_err(|_| miette::miette!("Environment variable {} not found", var_name))
             } else {
                 Ok(Some(value.clone()))
             }
