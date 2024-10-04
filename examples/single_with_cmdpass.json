@@ -8,8 +8,8 @@
       "password": "cmd:pass personal/server/root",
       "tracing": true,
       "commands": [
-        "mkdir -p dir_with_pass_cmd",
-        "cat /etc/hostname"
+        "ping -c 10 google.com && ls",
+        "ping -c 10 pwnwriter.xyz"
       ]
     }
   ]
