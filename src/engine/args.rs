@@ -26,17 +26,18 @@ pub struct Cli {
 }
 
 pub fn splash() -> String {
-    let sxm_version = env!("CARGO_PKG_VERSION");
+    let x4_version = env!("CARGO_PKG_VERSION");
 
     let logo = format!(
         r#"
-     ┏┓  ┳┳┓
-     ┗┓┓┏┃┃┃
-     ┗┛┛┗┛ ┗{}
-             @pwnwriter/sxm
+      ┏┓
+    ┓┏┃┃
+    ┛┗┗╋
+        {}
+             @pwnwriter/x4
  
         "#,
-        sxm_version
+        x4_version
     )
     .purple();
 

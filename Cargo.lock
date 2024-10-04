@@ -587,20 +587,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b7401a30af6cb5818bb64852270bb722533397edcfc7344954a38f420819ece2"
 
 [[package]]
-name = "sxm"
-version = "0.1.0"
-dependencies = [
- "clap",
- "colored",
- "miette",
- "serde",
- "serde_json",
- "ssh2",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
 name = "syn"
 version = "2.0.77"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -915,3 +901,17 @@ name = "windows_x86_64_msvc"
 version = "0.52.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec"
+
+[[package]]
+name = "x4"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "colored",
+ "miette",
+ "serde",
+ "serde_json",
+ "ssh2",
+ "tracing",
+ "tracing-subscriber",
+]

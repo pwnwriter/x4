@@ -15,7 +15,7 @@ fmt:
 
 # Run cargo fmt across source
 run:
-    @cargo run -- --pipeline ./examples/sxm.json
+    @cargo run -- --pipeline ./examples/x4.json
 
 # Run cargo clippy across source
 clippy:

@@ -1,9 +1,9 @@
 use miette::{Context, Result};
 
 use clap::Parser;
-use sxm::engine::args;
-use sxm::engine::configuration::parse_pipeline;
-use sxm::helpers::{run_app, setup_logging};
+use x4::engine::args;
+use x4::engine::configuration::parse_pipeline;
+use x4::helpers::{run_app, setup_logging};
 
 fn main() -> Result<()> {
     let cli = args::Cli::parse();

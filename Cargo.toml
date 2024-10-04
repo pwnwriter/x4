@@ -1,13 +1,13 @@
 [package]
-name = "sxm"
+name = "x4"
 version = "0.1.0"
 authors = ["pwnwriter <hey@pwnwriter.xyz>"]
 description = "Execute shell commands to a server via ssh protocol"
 edition = "2021"
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/pwnwriter/sxm"
-repository = "https://github.com/pwnwriter/sxm"
+homepage = "https://github.com/pwnwriter/x4"
+repository = "https://github.com/pwnwriter/x4"
 keywords = ["ssh", "ssh-command", "cli"]
 categories = ["command-line-utilities"]
 include = [
