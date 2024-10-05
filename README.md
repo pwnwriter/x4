@@ -33,14 +33,18 @@
 - [Features and todos](#features-and-todos)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Usages](#usages)
-    - [guide](#guide)    
+- [Usages](#usages)   
 - [Configuration](#configuration)
   - [Options](#options)
     - [Examples](#examples)
 - [Development](#development)
 - [Support my work](#support-my-work)
   <!--toc:end-->
+
+---
+
+> [!TIP]
+> Here's a blogpost on how i use [**x4 to deploy a website on aws ec2 instance**](/.github/guide.md)
 
 
 ## Features and todos
