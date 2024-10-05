@@ -1,11 +1,7 @@
 _default:
     @just -l
 
-alias t := test
-alias f := fmt
-alias r := run
-
-# List all generations
+# Run cargo test
 test:
     @cargo test
 
@@ -15,8 +11,12 @@ fmt:
 
 # Run cargo fmt across source
 run:
-    @cargo run -- --pipeline ./examples/x4.json
+    @cargo run -- --pipeline ./examples/many_servers.json
 
 # Run cargo clippy across source
 clippy:
     @cargo clippy -- --deny warnings
+
+release VERSION:
+    @git tag "v{{ VERSION }}"
+    @git push origin "v{{ VERSION }}"
