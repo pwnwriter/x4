@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  A lightweight implementation using <a href="https://libssh2.org" target="_blank">libssh2</a> to execute SSH commands on remote servers.
+  A lightweight implementation of <code>libssh2</code> to execute shell commands on remote servers with rich configuration via json.
 </p>
 
 
