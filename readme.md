@@ -23,7 +23,7 @@
   </a>
   
   <a href="https://github.com/pwnwriter/x4/actions?query=workflow%3A%22Continuous+Deployment%22">
-    <img src="https://img.shields.io/github/actions/workflow/status/pwnwriter/x4/ci.yml?style=flat&labelColor=eba0ac&color=74c7ec&label=nix-build&logo=GitHub%20Actions&logoColor=white" alt="GitHub Actions Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/pwnwriter/x4/nix-build.yml?style=flat&labelColor=eba0ac&color=74c7ec&label=nix-build&logo=GitHub%20Actions&logoColor=white" alt="GitHub Actions Status">
   </a>
   
   <a href="https://github.com/pwnwriter/x4/blob/main/LICENSE">
