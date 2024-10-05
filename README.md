@@ -34,6 +34,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usages](#usages)
+    - [guide](#guide)    
 - [Configuration](#configuration)
   - [Options](#options)
     - [Examples](#examples)
@@ -153,6 +154,9 @@ Options:
   -V, --version                          Print version
 
 ```
+
+> [!TIP]
+> Here's an blogpost on how i use [**x4 to deploy a website on aws ec3 instance**](/.github/guide.md)
 
 
 ## Configuration
