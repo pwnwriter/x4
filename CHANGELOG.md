@@ -1,69 +1,80 @@
-# Changelog
+<h1 align="center">x4</h1>
 
-All notable changes to this project will be documented in this file.
+## unreleased
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+### 🚀 Features
 
-## [Unreleased]
+- *(ci)* Ci for automaticaly releasing the project by @pwnwriter
+- *(ci)* Release plz ci for automatic release by @pwnwriter
+- *(cliff)* Git cliff template for pr and more by @pwnwriter
+- *(docs)* Docs skeleton , will work on it tomorrow by @pwnwriter
+- *(test)* Test case for validating clap args by @pwnwriter
+- *(arg)* Argument to check and validate pipeline json by @pwnwriter
+- *(arg)* Arguments to upload,download files by @pwnwriter
+- *(doc)* Docs for development shell via direnv by @pwnwriter
+- *(note)* Possible configuration values note by @pwnwriter
+- *(trace)* Use trace subscriber to show traces by @pwnwriter
+- *(core)* Refactor SSH command execution and enhance error handling by @pwnwriter
+- *(exec)* Run app via different entrypoint by @pwnwriter
+- *(core)* Introducing lib.rs with main func by @pwnwriter
+- *(just)* Justfile with alias and more by @pwnwriter
+- *(arg)* Inspect arg to list all connections by @pwnwriter
+- *(ssh)* Raw command execution via shell by @pwnwriter
+- *(ci)* Run build test on all major arch by @pwnwriter
+- *(nix)* Include examples to run tests; fixed openssl perl build by @pwnwriter
+- *(ci)* Ci for nix build and test by @pwnwriter
+- *(config)* Allow defining working dir username and more by @pwnwriter
+- *(core)* Core func and basic args by @pwnwriter
+- *(pipeline)* Configuration pipeline via json by @pwnwriter
+- *(init)* Initial project skeleton & basic structure by @pwnwriter
 
-## [0.1.0](https://github.com/pwnwriter/x4/releases/tag/v0.1.0) - 2024-10-05
+### 🚜 Refactor
 
-### Added
+- *(entry)* Renamed project from sxm to x4 by @pwnwriter
+- *(core)* Use different bin dir for binary by @pwnwriter
+- *(password)* Use match statement instead of if else by @pwnwriter
+- *(helpers)* Store helper functions inside helper modue by @pwnwriter
+- *(err)* Just wrap the error messges inline by @pwnwriter
+- *(arg,core)* Allow dead code for now, optimized args comments by @pwnwriter
+- *(logging)* Initiate tracing from entry by @pwnwriter
+- *(core)* Rename dir engine -> corex by @pwnwriter
+- *(core)* Breaking: renamed project sshy -> sxm by @pwnwriter
+- *(nix)* Simplified nix flake , add current debug bin to path by @pwnwriter
+- *(nix)* Use toml to read general info; sync lockfile by @pwnwriter
 
-- *(ci)* release plz ci for automatic release
-- *(cliff)* git cliff template for pr and more
-- *(docs)* docs skeleton , will work on it tomorrow
-- *(test)* test case for validating clap args
-- *(arg)* argument to check and validate pipeline json
-- *(arg)* arguments to upload,download files
-- *(doc)* docs for development shell via direnv
-- *(note)* possible configuration values note
-- *(trace)* use trace subscriber to show traces
-- *(core)* Refactor SSH command execution and enhance error handling
-- *(exec)* run app via different entrypoint
-- *(core)* introducing lib.rs with main func
-- *(just)* justfile with alias and more
-- *(arg)* inspect arg to list all connections
-- *(ssh)* raw command execution via shell
-- *(ci)* run build test on all major arch
-- *(nix)* include examples to run tests; fixed openssl perl build
-- *(ci)* ci for nix build and test
-- *(config)* allow defining working dir username and more
-- *(core)* core func and basic args
-- *(pipeline)* configuration pipeline via json
-- *(init)* initial project skeleton & basic structure
+### ⚙️ Miscellaneous Tasks
 
-### Other
+- Release by @github-actions[bot]
+- *(doc)* Improved desc of the app by @pwnwriter
+- *(nix)* Provide git-cliff inside devshell by @pwnwriter
+- *(cargo)* Fixed readme filename to include by @pwnwriter
+- *(example)* Must have a different unique server name by @pwnwriter
+- *(lib)* Fixed desc of the app by @pwnwriter
+- *(nix)* Fixed darwin stdenv pkg list by @pwnwriter
+- *(ci)* Temp pausing ci for now by @pwnwriter
+- *(test)* Use custom many server schema for testing by @pwnwriter
+- *(profile)* Provide desc for the app by @pwnwriter
+- *(nix)* Use absolute path via var for path by @pwnwriter
+- *(test)* Illivate filepath to a var by @pwnwriter
+- *(ssh)* Print stdin and stdout raw for  now by @pwnwriter
+- *(ci)* Provide default app for running via nix by @pwnwriter
+- *(ci)* Reverting back to use nix magic cache by @pwnwriter
+- *(error)* Show filenames as if there's an error by @pwnwriter
+- *(cargo)* Provide description of the app by @pwnwriter
+- *(ci)* Do not use magic nix cache for now by @pwnwriter
 
-- *(doc)* improved desc of the app
-- *(nix)* provide git-cliff inside devshell
-- *(cargo)* fixed readme filename to include
-- *(example)* Must have a different unique server name
-- *(entry)* renamed project from sxm to x4
-- *(out)* show preetified output in structred; and provide default binary
-- *(lib)* fixed desc of the app
-- *(core)* use different bin dir for binary
-- *(password)* use match statement instead of if else
-- *(nix)* fixed darwin stdenv pkg list
-- *(helpers)* store helper functions inside helper modue
-- *(ci)* temp pausing ci for now
-- *(err)* just wrap the error messges inline
-- *(arg,core)* allow dead code for now, optimized args comments
-- *(test)* use custom many server schema for testing
-- *(profile)* provide desc for the app
-- *(nix)* use absolute path via var for path
-- *(logging)* initiate tracing from entry
-- Merge pull request [#1](https://github.com/pwnwriter/x4/pull/1) from pwnwriter/dependabot/cargo/clap-4.5.18
-- *(test)* illivate filepath to a var
-- *(core)* implementation to use env and json schema for password & pubkey
-- *(core)* rename dir engine -> corex
-- *(core)* breaking: renamed project sshy -> sxm
-- *(ssh)* print stdin and stdout raw for  now
-- *(ci)* provide default app for running via nix
-- *(nix)* simplified nix flake , add current debug bin to path
-- *(ci)* reverting back to use nix magic cache
-- *(error)* show filenames as if there's an error
-- *(cargo)* provide description of the app
-- *(ci)* do not use magic nix cache for now
-- *(nix)* use toml to read general info; sync lockfile
+### Impl
+
+- *(core)* Implementation to use env and json schema for password & pubkey by @pwnwriter
+
+### Preetify
+
+- *(out)* Show preetified output in structred; and provide default binary by @pwnwriter
+
+
+## New Contributors
+* @pwnwriter made their first contribution
+* @github-actions[bot] made their first contribution
+* @dependabot[bot] made their first contribution
+
+<!-- generated by git-cliff -->
