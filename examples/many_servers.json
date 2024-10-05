@@ -2,7 +2,7 @@
   "servers": [
     {
       "description": "using a cmd to get password for SSH authentication and default 22 port",
-      "name": "ec2",
+      "name": "ec201",
       "host": "fawn.pwnwriter.xyz",
       "user": "wolf",
       "password": "cmd:pass personal/server/root",
