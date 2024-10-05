@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           mkdir release/
-          cp {LICENSE,README.md} release/
+          cp {LICENSE,readme.md} release/
           cp target/${{ matrix.config.TARGET }}/release/x4 release/
           mv release/ x4-${{ env.RELEASE_VERSION }}/
 
