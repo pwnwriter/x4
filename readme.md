@@ -68,6 +68,7 @@
 - **ssh connection**: must have ssh connections using one of the following authentication methods:
   - **password authentication**: using the `username` and `password`.
   - **keypair**: public key authentication.
+  - No extra deps will be required for runtime
 
 
 ## Installation
