@@ -14,7 +14,7 @@ include = [
         "src/**/*",
         "Cargo.*",
         "LICENSE*",
-        "README.md",
+        "readme.md",
         "CHANGELOG.md",
 ]
 
