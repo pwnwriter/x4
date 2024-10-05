@@ -33,6 +33,7 @@
           packages =
             (with pkgs; [
               cmake
+              git-cliff
             ])
             ++ (pkgs.lib.optional pkgs.stdenv.isDarwin (darwinDeps pkgs));
 
