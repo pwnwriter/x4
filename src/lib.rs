@@ -11,7 +11,7 @@ pub mod helpers {
 
     use crate::{
         configuration::{PasswordRetriever, Pipeline},
-        engine::{args::Cli, inspect},
+        engine::args::Cli,
         interaction::{connect_with_password, connect_with_private_key},
     };
     use miette::Context;
@@ -31,7 +31,7 @@ pub mod helpers {
         Ok(())
     }
 
-    pub fn run_app(cli: Cli, pipeline: Pipeline) -> Result<()> {
+    pub fn run_app(_cli: Cli, pipeline: Pipeline) -> Result<()> {
         for server in pipeline.servers {
             info!("Processing server: {}", server.name);
 
@@ -62,15 +62,11 @@ pub mod helpers {
                     server.commands.clone(),
                 );
             } else {
-                eprintln!(
+                tracing::error!(
                     "No authentication method provided for server: {}",
                     server.name
                 );
             }
-        }
-
-        if cli.inspect {
-            inspect::inspect_available();
         }
 
         Ok(())

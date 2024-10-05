@@ -16,13 +16,9 @@ pub struct Cli {
     #[arg(short, long)]
     pub pipeline: Option<PathBuf>,
 
-    /// Connect and request a list of identities
-    #[arg(long)]
-    pub inspect: bool,
-
     /// Check the configuration of the specified pipeline.
     #[arg(long)]
-    pub check_pipeline: bool,
+    pub check_pipeline: Option<PathBuf>,
 }
 
 pub fn splash() -> String {
