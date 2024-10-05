@@ -17,6 +17,7 @@ run:
 clippy:
     @cargo clippy -- --deny warnings
 
+# Do a release of the project requires version specify
 release VERSION:
     @git tag "v{{ VERSION }}"
     @git push origin "v{{ VERSION }}"
