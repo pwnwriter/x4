@@ -159,10 +159,6 @@ Options:
 
 ```
 
-> [!TIP]
-> Here's an blogpost on how i use [**x4 to deploy a website on aws ec3 instance**](/.github/guide.md)
-
-
 ## Configuration
 
 ### Options
