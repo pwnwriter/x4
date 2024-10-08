@@ -169,7 +169,7 @@ The configuration JSON supports the following key values for server definitions:
 |--------------|-------------------------------------------------------------|-------------------------------------------|
 | `description`| A brief description of the server's purpose or role.      | My hot EC2 instance                        |
 | `name`       | A unique identifier for the server.                        | ec2                                       |
-| `host`       | The hostname or IP address of the server.                  | fawn.pwnwriter.xyz                        |
+| `host`       | The hostname or IP address of the server.                  | fawn.pwnwriter.me                        |
 | `port`       | The SSH port to connect to the server. Defaults to `22`.   | 22                                        |
 | `user`       | The username used for SSH authentication.                  | fawn                                      |
 | `password`   | Method of authentication for SSH: use an environment variable (prefix with `env:`) or a command (prefix with `cmd:`). See [Password Retrieval](#password-retrieval) for details. | `env:wolf_pass` or `cmd:pass uni/server/wolf` |
@@ -209,7 +209,7 @@ The `password` field allows for secure handling of sensitive information using e
     {
       "description": "using a cmd to get password for SSH authentication and default 22 port",
       "name": "ec2",
-      "host": "fawn.pwnwriter.xyz",
+      "host": "fawn.pwnwriter.me",
       "user": "wolf",
       "password": "cmd:pass personal/server/root",
       "commands": [
@@ -229,7 +229,7 @@ The `password` field allows for secure handling of sensitive information using e
     {
       "description": "using a cmd to get password for SSH authentication and default 22 port",
       "name": "ec201",
-      "host": "fawn.pwnwriter.xyz",
+      "host": "fawn.pwnwriter.me",
       "user": "wolf",
       "password": "cmd:pass personal/server/root",
       "commands": [
@@ -240,7 +240,7 @@ The `password` field allows for secure handling of sensitive information using e
     {
       "description": "using a private key for SSH authentication and default 22 port",
       "name": "ec2",
-      "host": "fawn.pwnwriter.xyz",
+      "host": "fawn.pwnwriter.me",
       "user": "fawn",
       "private_key": "/Users/pwnwriter/.local/share/ssh/wynwood.pem",
       "commands": [
@@ -278,4 +278,4 @@ I do open source work in my free time, and I really enjoy it! If any of my appli
 
 
 <p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
-<p align="center">copyright &copy; 2024 <a href="https://pwnwriter.xyz" target="_blank"> pwnwriter xyz<a> 🍃</a> 
+<p align="center">copyright &copy; 2024 <a href="https://pwnwriter.me" target="_blank"> pwnwriter.me<a> 🍃</a> 

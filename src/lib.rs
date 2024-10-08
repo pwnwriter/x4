@@ -1,6 +1,6 @@
 //! x4: Execute shell commands to a server via ssh protocol
 //!
-//! Copyright (c) pwnwriter <hey@pwnwriter.xyz>
+//! Copyright (c) pwnwriter <hey@pwnwriter.me>
 
 pub mod engine;
 pub use engine::{args, configuration, interaction};
